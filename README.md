@@ -28,22 +28,10 @@ Secure Authentication: User login and sign-up via Clerk for secure authenticatio
 
 Responsive UI: Fully responsive design using Tailwind CSS.
 
-### Make sure to create a `.env` file with following variables -
+# Preview:
+<img width="956" alt="image" src="https://github.com/user-attachments/assets/4e29a971-566b-4682-8ad6-dec09796fea6" />
 
-```
-DATABASE_URL=
-DIRECT_URL=
+<img width="945" alt="image" src="https://github.com/user-attachments/assets/6de875df-f387-4a50-9b10-b7b6eb5f7362" />
 
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/onboarding
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/onboarding
+<img width="920" alt="image" src="https://github.com/user-attachments/assets/87c247d5-a338-484d-a50b-02a93eb19295" />
 
-GEMINI_API_KEY=
-
-RESEND_API_KEY=
-
-ARCJET_KEY=
-```
