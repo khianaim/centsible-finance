@@ -1,7 +1,19 @@
-# Full Stack AI Fianace Platform with Next JS, Supabase, Tailwind, Prisma, Inngest, ArcJet, Shadcn UI Tutorial 🔥🔥
-## https://youtu.be/egS6fnZAdzk
+# Centsible Finance: Full Stack AI Finance Platform
 
-<img width="1470" alt="Screenshot 2024-12-10 at 9 45 45 AM" src="https://github.com/user-attachments/assets/1bc50b85-b421-4122-8ba4-ae68b2b61432">
+An AI-powered finance platform built with Next.js, Supabase, Tailwind CSS, Prisma, Inngest, and ArcJet. 
+This platform provides users with a comprehensive set of tools to manage their finances smarter, track expenses, and receive personalized AI-driven insights.
+
+# Features:
+
+Expense Tracking: Monitor spending habits and categorize transactions.
+
+AI-powered Budgeting: Real-time budgeting suggestions and recommendations based on user input.
+
+Personalized Financial Advice: AI-driven career and financial insights.
+
+Secure Authentication: User login and sign-up via Clerk for secure authentication.
+
+Responsive UI: Fully responsive design using Tailwind CSS.
 
 ### Make sure to create a `.env` file with following variables -
 
