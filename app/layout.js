@@ -22,10 +22,9 @@ export default function RootLayout({ children }) {
             <Header />
             <main className="min-h-screen">{children}</main>
             <Toaster richColors />
-           <footer className="bg-[#fafff7] py-3">
-            <div className="container mx-auto px-4 text-center text-black/60 text-sm">
-              <p className="font-semibold"> © 2025 Centsible Finance</p>
-              <p className="text-xs text-black/40 ">Developer & Designer - K. Mannix</p>
+           <footer className="bg-black py-2">
+            <div className="container mx-auto px-4 text-center text-white text-sm">
+              <p className="font-semibold"> © 2025 Centsible Finance (K.M)</p>
             </div>
           </footer>
         </body>

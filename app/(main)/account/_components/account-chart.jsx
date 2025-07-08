@@ -78,7 +78,7 @@ export function AccountChart({ transactions }) {
   return (
   <Card
   className="
-    bg-white/30 
+    bg-[#ddffc9]
     border border-[#1F4842] 
     backdrop-blur-md 
     rounded-2xl 
@@ -87,8 +87,8 @@ export function AccountChart({ transactions }) {
     transition-shadow duration-300
     text-gray-900"
 >
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7">
-        <CardTitle className="text-base font-normal">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7 text-white">
+        <CardTitle className="text-lg font-normal text-black">
           Transaction Overview
         </CardTitle>
         <Select defaultValue={dateRange} onValueChange={setDateRange}>
@@ -107,19 +107,19 @@ export function AccountChart({ transactions }) {
       <CardContent>
         <div className="flex justify-around mb-6 text-sm">
           <div className="text-center">
-            <p className="text-muted-foreground">Total Income</p>
+            <p className="text-black">Total Income</p>
             <p className="text-lg font-bold text-green-500">
               ${totals.income.toFixed(2)}
             </p>
           </div>
           <div className="text-center">
-            <p className="text-muted-foreground">Total Expenses</p>
+            <p className="text-black">Total Expenses</p>
             <p className="text-lg font-bold text-red-500">
               ${totals.expense.toFixed(2)}
             </p>
           </div>
           <div className="text-center">
-            <p className="text-muted-foreground">Net</p>
+            <p className="text-black">Net</p>
             <p
               className={`text-lg font-bold ${
                 totals.income - totals.expense >= 0

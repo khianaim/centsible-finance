@@ -1,19 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import React, { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import HeroSection from "@/components/hero";
-import Link from "next/link";
-import { featuresData } from "@/data/landing";
-import HowItWorksSection from "@/components/stepscard";
+import FeaturesSection from "@/components/features";
 
 const LandingPage = () => {
   const [yearly, setYearly] = useState(false);
-
   const togglePricing = () => setYearly(!yearly);
-
+  const pricingRef = useRef(null);
+  const isInView = useInView(pricingRef, { once: true, threshold: 0.25 });
   const pricingPlans = [
     {
       name: "Basic",
@@ -26,7 +22,7 @@ const LandingPage = () => {
       description: "Ideal for individual financial budgeting",
     },
     {
-      name: "Pro",
+      name: "Smart Saver",
       price: yearly ? "$225" : "$20",
       popular: true,
       features: [
@@ -37,7 +33,7 @@ const LandingPage = () => {
       description: "Professional solutions for growing businesses",
     },
     {
-      name: "Enterprise",
+      name: "Cents of Security",
       price: yearly ? "$499" : "$45",
       features: [
         { title: "Multi-user/team access", description: "Multiple user log-ins and tracking for groups", featured: true },
@@ -49,30 +45,35 @@ const LandingPage = () => {
   ];
 
   return (
-    <div className="bg-[#fafff7] min-h-screen">
+    <div className="bg-black min-h-screen">
+
       {/* Hero Section */}
-      <section className="pb-12">
-        <HeroSection />
-      </section>
+          <section>
+           <HeroSection />
+           </section>
 
-    <HowItWorksSection/>
-
+      {/* Features Section */}
+            <section>
+            <FeaturesSection/>
+            </section>
+            
       {/* Pricing Section */}
-      <section
-        id="pricing"
-        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-12 md:py-16"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 40 }}
-          transition={{ duration: 0.6 }}
+            <section
+          id="pricing"
+          ref={pricingRef}
+          className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12 md:py-16"
         >
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            exit={{ opacity: 0, y: 40 }}
+            transition={{ duration: 0.6 }}
+          >
           <header className="text-center mb-8">
-            <h2 className="text-black/90 text-5xl font-bold mb-5">
-              Choose the plan for you
+            <h2 className="text-[#8aeb30]  text-5xl font-bold mb-5">
+              Freedom is free. Growth is optional.
             </h2>
-            <div className="flex flex-wrap items-center justify-center gap-4 text-base font-light uppercase text-black">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-sm font-light uppercase text-[#f1fde9]">
               <span>Monthly</span>
               <label className="relative inline-block w-14 h-8">
                 <input
@@ -81,12 +82,12 @@ const LandingPage = () => {
                   checked={yearly}
                   onChange={togglePricing}
                 />
-                <div className="w-full h-full bg-gray-300 rounded-full transition peer-checked:bg-gradient-to-r peer-checked:from-[#b1da78] peer-checked:to-[#8aeb30]"></div>
+                <div className="w-full h-[30px] bg-gray-300 rounded-full transition peer-checked:bg-[#8aeb30] mt-0.5"></div>
                 <div className="absolute left-1 bottom-1 bg-white w-6 h-6 rounded-full transition peer-checked:translate-x-6"></div>
               </label>
               <span className="flex items-center gap-2">
                 Yearly
-                <span className="ml-2 px-2 py-0.5 bg-[#8aeb30] text-black text-xs rounded-full">
+                <span className="ml-2 px-2 py-0.5 bg-[#0b4246] text-[#fafff7] text-xs rounded-full">
                   Save 20%
                 </span>
               </span>
@@ -103,16 +104,16 @@ const LandingPage = () => {
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-2 right-4 bg-[#8aeb30] text-black px-3 py-0.5 text-sm font-light rounded-full shadow">
+                  <div className="absolute -top-2 right-4 bg-[#0b4246] text-[#fafff7] px-3 py-0.5 text-sm font-light rounded-full shadow">
                     Most Popular
                   </div>
                 )}
                 <div className="flex flex-col h-full p-4">
                   <div className="text-center mb-4">
-                    <h2 className="text-lg sm:text-xl font-normal mb-1 text-black">
+                    <h2 className="text-base sm:text-lg font-normal mb-1 text-black">
                       {plan.name}
                     </h2>
-                    <div className="text-2xl sm:text-3xl font-bold text-black/90">
+                    <div className="text-lg sm:text-xl font-bold text-black/90">
                       {plan.price}
                     </div>
                   </div>
@@ -123,7 +124,7 @@ const LandingPage = () => {
                         key={i}
                         className={`flex items-start gap-2 p-2 rounded-md transition text-sm ${
                           feature.featured
-                            ? "bg-[#f7f9f4] border-l-4 border-black"
+                            ? "bg-[#dcf9ce] border-l-4 border-[#0b4246]"
                             : "hover:bg-gray-50"
                         }`}
                       >
@@ -136,7 +137,7 @@ const LandingPage = () => {
                     ))}
                   </ul>
 
-                  <button className="mt-auto w-full bg-black text-white rounded-full font-medium py-2.5 hover:shadow-md transition text-sm">
+                  <button className="mt-auto w-full bg-[#0b4246] text-white rounded-full font-medium py-2.5 hover:shadow-md transition text-sm">
                     Choose Plan
                   </button>
                 </div>

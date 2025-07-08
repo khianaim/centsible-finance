@@ -50,24 +50,25 @@ export function AccountCard({ account }) {
   }, [error]);
 
   return (
-   <Card
+ <Card
   className="
-    hover:shadow-md 
-    transition-shadow 
     group 
     relative
-    bg-[#b7f57c]
-    border border-[#d2efd4]
+    border border-[#0b4246]/60
+    bg-[#ddffc9]
     backdrop-blur-md 
     rounded-2xl 
     shadow-lg 
     hover:shadow-xl 
-    text-gray-900
+    transition-shadow duration-300
+    hover:border-[#82f85b]
+    hover:shadow-[0_0_20px_#82f85b]
+    text-[#ddffc9]
   "
 >
       <Link href={`/account/${id}`}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-base text-black font-normal capitalize">
+          <CardTitle className="text-lg text-black font-semibold capitalize">
             {name}
           </CardTitle>
           <Switch
@@ -77,20 +78,20 @@ export function AccountCard({ account }) {
           />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">
+          <div className="text-3xl font-bold">
             ${parseFloat(balance).toFixed(2)}
           </div>
-          <p className="text-xs font-light text-black/70">
+          <p className="text-base font-light text-black/70">
             {type.charAt(0) + type.slice(1).toLowerCase()} Account
           </p>
         </CardContent>
-        <CardFooter className="flex justify-between text-sm text-black/90">
-  <div className="flex items-center bg-green-100 text-green-700 px-3 py-1 rounded-full">
-    <ArrowUpRight className="mr-1 h-4 w-4 text-green-500" />
+        <CardFooter className="flex justify-between text-sm text-black/90 font-semibold">
+  <div className="flex items-center bg-green-300 text-green-700 px-3 py-1 rounded-full">
+    <ArrowUpRight className="mr-1 h-5 w-5 text-green-700" />
     Income
   </div>
-  <div className="flex items-center bg-red-100 text-red-700 px-3 py-1 rounded-full">
-    <ArrowDownRight className="mr-1 h-4 w-4 text-red-500" />
+  <div className="flex items-center bg-red-300 text-red-700 px-3 py-1 rounded-full">
+    <ArrowDownRight className="mr-1 h-5 w-5 text-red-700" />
     Expense
   </div>
 </CardFooter>

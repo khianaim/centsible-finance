@@ -81,18 +81,25 @@ export function AddTransactionForm({
     data: transactionResult,
   } = useFetch(editMode ? updateTransaction : createTransaction);
 
-  const onSubmit = (data) => {
-    const formData = {
-      ...data,
-      amount: parseFloat(data.amount),
-    };
-
-    if (editMode) {
-      transactionFn(editId, formData);
-    } else {
-      transactionFn(formData);
-    }
+ const onSubmit = (data) => {
+  const formData = {
+    ...data,
+    amount: parseFloat(data.amount),
+    date:
+      data.date instanceof Date
+        ? data.date.toISOString()
+        : typeof data.date === "string"
+        ? data.date
+        : new Date().toISOString(),
   };
+
+ if (editMode) {
+  transactionFn({ id: editId, ...formData });
+} else {
+  transactionFn(formData);
+}
+
+};
 
   const handleScanComplete = (scannedData) => {
     if (scannedData) {
@@ -129,33 +136,26 @@ export function AddTransactionForm({
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      {/* Receipt Scanner - Only show in create mode */}
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-6 bg-[#ddffc9] p-6 rounded-xl text-black"
+    >
       {!editMode && <ReceiptScanner onScanComplete={handleScanComplete} />}
 
-          {/* Type */}
       <div className="space-y-2">
         <label className="text-sm font-medium">Type</label>
-        <Select
-          onValueChange={(value) => setValue("type", value)}
-          defaultValue={type}
-        >
-          <SelectTrigger
-            className="bg-white text-black hover:bg-gray-100 transition-colors duration-150 ease-in-out"
-          >
-            <SelectValue placeholder="Select type" className="text-muted-foreground" />
+        <Select onValueChange={(value) => setValue("type", value)} defaultValue={type}>
+          <SelectTrigger className="bg-[#fafff7] text-black hover:bg-gray-100">
+            <SelectValue placeholder="Select type" className="text-gray-500" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="EXPENSE">Expense</SelectItem>
             <SelectItem value="INCOME">Income</SelectItem>
           </SelectContent>
         </Select>
-        {errors.type && (
-          <p className="text-sm text-red-500">{errors.type.message}</p>
-        )}
+        {errors.type && <p className="text-sm text-red-500">{errors.type.message}</p>}
       </div>
 
-      {/* Amount and Account */}
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-2">
           <label className="text-sm font-medium">Amount</label>
@@ -164,11 +164,9 @@ export function AddTransactionForm({
             step="0.01"
             placeholder="0.00"
             {...register("amount")}
-            className="bg-white text-black placeholder:text-muted-foreground"
+            className="bg-[#fafff7] text-black placeholder:text-gray-500"
           />
-          {errors.amount && (
-            <p className="text-sm text-red-500">{errors.amount.message}</p>
-          )}
+          {errors.amount && <p className="text-sm text-red-500">{errors.amount.message}</p>}
         </div>
 
         <div className="space-y-2">
@@ -177,10 +175,8 @@ export function AddTransactionForm({
             onValueChange={(value) => setValue("accountId", value)}
             defaultValue={getValues("accountId")}
           >
-            <SelectTrigger
-              className="bg-white text-black hover:bg-gray-100 transition-colors duration-150 ease-in-out"
-            >
-              <SelectValue placeholder="Select account" className="text-muted-foreground" />
+            <SelectTrigger className="bg-[#fafff7] text-black hover:bg-gray-100">
+              <SelectValue placeholder="Select account" className="text-gray-500" />
             </SelectTrigger>
             <SelectContent>
               {accounts.map((account) => (
@@ -189,32 +185,24 @@ export function AddTransactionForm({
                 </SelectItem>
               ))}
               <CreateAccountDrawer>
-                <Button
-                  variant="ghost"
-                  className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground"
-                >
+                <Button variant="ghost" className="text-left w-full">
                   Create Account
                 </Button>
               </CreateAccountDrawer>
             </SelectContent>
           </Select>
-          {errors.accountId && (
-            <p className="text-sm text-red-500">{errors.accountId.message}</p>
-          )}
+          {errors.accountId && <p className="text-sm text-red-500">{errors.accountId.message}</p>}
         </div>
       </div>
 
-      {/* Category */}
       <div className="space-y-2">
         <label className="text-sm font-medium">Category</label>
         <Select
           onValueChange={(value) => setValue("category", value)}
           defaultValue={getValues("category")}
         >
-          <SelectTrigger
-            className="bg-white text-black hover:bg-gray-100 transition-colors duration-150 ease-in-out"
-          >
-            <SelectValue placeholder="Select category" className="text-muted-foreground" />
+          <SelectTrigger className="bg-[#fafff7] text-black hover:bg-gray-100">
+            <SelectValue placeholder="Select category" className="text-gray-500" />
           </SelectTrigger>
           <SelectContent>
             {filteredCategories.map((category) => (
@@ -224,61 +212,51 @@ export function AddTransactionForm({
             ))}
           </SelectContent>
         </Select>
-        {errors.category && (
-          <p className="text-sm text-red-500">{errors.category.message}</p>
-        )}
+        {errors.category && <p className="text-sm text-red-500">{errors.category.message}</p>}
       </div>
 
-      {/* Date */}
       <div className="space-y-2">
         <label className="text-sm font-medium">Date</label>
         <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            className={cn(
-              "w-full pl-3 text-left font-normal bg-white text-black", 
-              !date ? "text-muted-foreground" : "text-black", 
-              "hover:bg-gray-100 hover:text-black", 
-              "transition-colors duration-150 ease-in-out"
-            )}
-          >
-            {date ? format(date, "PPP") : <span>Pick a date</span>}
-            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={(date) => setValue("date", date)}
-            disabled={(date) =>
-              date > new Date() || date < new Date("1900-01-01")
-            }
-            initialFocus
-          />
-        </PopoverContent>
-      </Popover>
-        {errors.date && (
-          <p className="text-sm text-red-500">{errors.date.message}</p>
-        )}
+          <PopoverTrigger asChild>
+            <Button
+              className={cn(
+                "w-full pl-3 text-left font-normal bg-[#fafff7] text-black",
+                !date ? "text-gray-500" : "text-black",
+                "hover:bg-gray-100 hover:text-black"
+              )}
+            >
+              {date ? format(date, "PPP") : <span>Pick a date</span>}
+              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={(date) => setValue("date", date)}
+              disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+        {errors.date && <p className="text-sm text-red-500">{errors.date.message}</p>}
       </div>
 
-      {/* Description */}
       <div className="space-y-2">
         <label className="text-sm font-medium">Description</label>
-        <div className="bg-white">
-        <Input placeholder="Enter description" {...register("description")} />
-        {errors.description && (
-          <p className="text-sm text-red-500">{errors.description.message}</p>
-        )}
-        </div>
+        <Input
+          placeholder="Enter description"
+          {...register("description")}
+          className="bg-[#fafff7] text-black placeholder:text-gray-500"
+        />
+        {errors.description && <p className="text-sm text-red-500">{errors.description.message}</p>}
       </div>
 
-      {/* Recurring Toggle */}
-      <div className="flex flex-row items-center justify-between rounded-lg border p-4 bg-white">
+      <div className="flex flex-row items-center justify-between rounded-lg border p-4 bg-[#fafff7]">
         <div className="space-y-0.5">
           <label className="text-base font-medium">Recurring Transaction</label>
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-gray-500">
             Set up a recurring schedule for this transaction
           </div>
         </div>
@@ -288,7 +266,6 @@ export function AddTransactionForm({
         />
       </div>
 
-      {/* Recurring Interval */}
       {isRecurring && (
         <div className="space-y-2">
           <label className="text-sm font-medium">Recurring Interval</label>
@@ -296,8 +273,8 @@ export function AddTransactionForm({
             onValueChange={(value) => setValue("recurringInterval", value)}
             defaultValue={getValues("recurringInterval")}
           >
-            <SelectTrigger>
-              <SelectValue placeholder="Select interval" />
+            <SelectTrigger className="bg-[#fafff7] text-black hover:bg-gray-100">
+              <SelectValue placeholder="Select interval" className="text-gray-500" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="DAILY">Daily</SelectItem>
@@ -307,24 +284,25 @@ export function AddTransactionForm({
             </SelectContent>
           </Select>
           {errors.recurringInterval && (
-            <p className="text-sm text-red-500">
-              {errors.recurringInterval.message}
-            </p>
+            <p className="text-sm text-red-500">{errors.recurringInterval.message}</p>
           )}
         </div>
       )}
 
-      {/* Actions */}
       <div className="flex gap-4">
         <Button
           type="button"
           variant="outline"
-          className="w-full"
+          className="w-full bg-white text-black hover:bg-white"
           onClick={() => router.back()}
         >
           Cancel
         </Button>
-        <Button type="submit" className="w-full rounded-full" disabled={transactionLoading}>
+        <Button
+          type="submit"
+          className="w-full rounded-full bg-[#8aeb30] text-black hover:bg-[#8aeb30]"
+          disabled={transactionLoading}
+        >
           {transactionLoading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

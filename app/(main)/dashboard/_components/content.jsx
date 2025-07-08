@@ -21,8 +21,8 @@ export function DashboardContent({ accounts, transactions, budgetData }) {
         <CreateAccountDrawer>
           <Card
             className="
-              bg-white
-              border-dashed border-2 border-gray-600 
+              bg-[#151515fe]
+              border-dashed border-2 border-[#fafff7]
               rounded-2xl
               shadow-md
               transition-shadow duration-300
@@ -30,7 +30,7 @@ export function DashboardContent({ accounts, transactions, budgetData }) {
               text-gray-700
             "
           >
-            <CardContent className="flex flex-col items-center justify-center text-black/90 h-full pt-5">
+            <CardContent className="flex flex-col items-center justify-center text-[#fafff7] h-full pt-5">
               <Plus className="h-10 w-10 mb-2" />
               <p className="text-base font-light">Add New Account</p>
             </CardContent>

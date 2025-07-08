@@ -4,9 +4,8 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #fafff7;
+  background-color: #000;
 }
-
 
 html {
   scroll-behavior: smooth;
@@ -75,5 +74,11 @@ body::-webkit-scrollbar {
     display: flex !important;
     flex-direction: column !important;
     gap: 1.5rem !important;
+  }
+}
+
+@media (max-width: 440px) {
+  #features {
+    padding-top: 4rem; /* Lower top padding = content appears higher */
   }
 }

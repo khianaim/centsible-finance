@@ -23,32 +23,28 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 const COLORS = [
-  "#1F4842", 
-  "#70C49C", 
-  "#A1D9B2", 
-  "#FFB347", 
-  "#FF7F7F", 
-  "#B4E197", 
-  "#A3C4BC", 
+  "#1F4842",
+  "#70C49C",
+  "#A1D9B2",
+  "#FFB347",
+  "#FF7F7F",
+  "#B4E197",
+  "#A3C4BC",
 ];
-
 
 export function DashboardOverview({ accounts, transactions }) {
   const [selectedAccountId, setSelectedAccountId] = useState(
     accounts.find((a) => a.isDefault)?.id || accounts[0]?.id
   );
 
-  // Filter transactions for selected account
   const accountTransactions = transactions.filter(
     (t) => t.accountId === selectedAccountId
   );
 
-  // Get recent transactions (last 5)
   const recentTransactions = accountTransactions
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 5);
 
-  // Calculate expense breakdown for current month
   const currentDate = new Date();
   const currentMonthExpenses = accountTransactions.filter((t) => {
     const transactionDate = new Date(t.date);
@@ -59,18 +55,16 @@ export function DashboardOverview({ accounts, transactions }) {
     );
   });
 
-  // Group expenses by category
- const expensesByCategory = currentMonthExpenses.reduce((acc, transaction) => {
-  const category =
-    transaction.category.charAt(0).toUpperCase() + transaction.category.slice(1);
-  if (!acc[category]) {
-    acc[category] = 0;
-  }
-  acc[category] += transaction.amount;
-  return acc;
-}, {});
+  const expensesByCategory = currentMonthExpenses.reduce((acc, transaction) => {
+    const category =
+      transaction.category.charAt(0).toUpperCase() + transaction.category.slice(1);
+    if (!acc[category]) {
+      acc[category] = 0;
+    }
+    acc[category] += transaction.amount;
+    return acc;
+  }, {});
 
-  // Format data for pie chart
   const pieChartData = Object.entries(expensesByCategory).map(
     ([category, amount]) => ({
       name: category,
@@ -81,15 +75,9 @@ export function DashboardOverview({ accounts, transactions }) {
   return (
     <div className="grid gap-4 md:grid-cols-2">
       {/* Recent Transactions Card */}
-       <Card
-         className="
-    bg-white
-    rounded-2xl
-    shadow-lg
-    border-none
-  ">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-          <CardTitle className="text-lg font-medium text-black ">
+      <Card className="bg-[#ddffc9] text-black rounded-2xl shadow-lg border-none">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-lg font-semibold">
             Recent Transactions
           </CardTitle>
           <Select
@@ -111,20 +99,20 @@ export function DashboardOverview({ accounts, transactions }) {
         <CardContent>
           <div className="space-y-4">
             {recentTransactions.length === 0 ? (
-              <p className="text-center text-black/90  font-light py-4">
+              <p className="text-center font-light py-4">
                 No recent transactions
               </p>
             ) : (
               recentTransactions.map((transaction) => (
                 <div
                   key={transaction.id}
-                  className="flex items-center justify-between capitalise"
+                  className="flex items-center justify-between capitalize"
                 >
                   <div className="space-y-1">
-                    <p className="text-base font-normal leading-none">
+                    <p className="text-base font-medium leading-none">
                       {transaction.description || "Untitled Transaction"}
                     </p>
-                    <p className="text-sm text-black/90 font-light">
+                    <p className="text-sm font-light">
                       {format(new Date(transaction.date), "PP")}
                     </p>
                   </div>
@@ -133,8 +121,8 @@ export function DashboardOverview({ accounts, transactions }) {
                       className={cn(
                         "flex items-center",
                         transaction.type === "EXPENSE"
-                          ? "text-red-500"
-                          : "text-green-500"
+                          ? "text-red-600"
+                          : "text-green-700"
                       )}
                     >
                       {transaction.type === "EXPENSE" ? (
@@ -153,21 +141,15 @@ export function DashboardOverview({ accounts, transactions }) {
       </Card>
 
       {/* Expense Breakdown Card */}
-            <Card
-           className="
-          bg-white
-          rounded-2xl
-          shadow-lg
-          border-none
-        " >
+      <Card className="bg-[#ddffc9] text-black rounded-2xl shadow-lg border-none">
         <CardHeader>
-          <CardTitle className="text-lg font-medium text-black">
+          <CardTitle className="text-lg font-medium">
             Monthly Expense Breakdown
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0 pb-5">
           {pieChartData.length === 0 ? (
-            <p className="text-center text-black font-light py-4">
+            <p className="text-center font-light py-4">
               No expenses this month
             </p>
           ) : (
@@ -193,9 +175,10 @@ export function DashboardOverview({ accounts, transactions }) {
                   <Tooltip
                     formatter={(value) => `$${value.toFixed(2)}`}
                     contentStyle={{
-                      backgroundColor: "hsl(var(--popover))",
-                      border: "1px solid hsl(var(--border))",
-                      borderRadius: "var(--radius)",
+                      backgroundColor: "white",
+                      border: "1px solid #ccc",
+                      borderRadius: "8px",
+                      color: "black",
                     }}
                   />
                   <Legend />

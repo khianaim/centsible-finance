@@ -64,23 +64,16 @@ export function BudgetProgress({ initialBudget, currentExpenses }) {
   }, [error]);
 
   return (
-    <Card
-  className="
-    bg-white
-    rounded-2xl
-    shadow-lg
-    border-none
-  "
->
+    <Card className="bg-[#ddffc9] text-black rounded-2xl shadow-lg border-none">
       <CardHeader className="pb-4">
         <div className="flex items-start justify-between">
           <div>
-          <CardTitle className="text-lg font-medium text-black flex items-center gap-2">
-          <div className="p-1.5 rounded-full bg-[#e9ffd2]/70">
-            <Wallet className="w-6 h-4 text-black" />
-          </div>
-          Monthly Budget
-          </CardTitle>
+            <CardTitle className="text-lg font-medium flex items-center gap-2">
+              <div className="p-1.5 rounded-full bg-[#8aeb30]/65">
+                <Wallet className="w-6 h-4 text-black" />
+              </div>
+              Monthly Budget
+            </CardTitle>
             <div className="flex items-center gap-2 mt-2">
               {isEditing ? (
                 <>
@@ -88,7 +81,7 @@ export function BudgetProgress({ initialBudget, currentExpenses }) {
                     type="number"
                     value={newBudget}
                     onChange={(e) => setNewBudget(e.target.value)}
-                    className="w-32 text-sm"
+                    className="w-32 text-sm text-black"
                     placeholder="Enter amount"
                     autoFocus
                     disabled={isLoading}
@@ -114,11 +107,11 @@ export function BudgetProgress({ initialBudget, currentExpenses }) {
                 </>
               ) : (
                 <>
-                  <CardDescription className="text-sm text-black/90 font-light">
+                  <CardDescription className="text-base text-black font-light">
                     {initialBudget
-                      ? `$${currentExpenses.toFixed(
+                      ? `$${currentExpenses.toFixed(2)} of $${initialBudget.amount.toFixed(
                           2
-                        )} of $${initialBudget.amount.toFixed(2)} spent`
+                        )} spent`
                       : "No budget set"}
                   </CardDescription>
                   <Button
@@ -127,7 +120,7 @@ export function BudgetProgress({ initialBudget, currentExpenses }) {
                     onClick={() => setIsEditing(true)}
                     className="h-6 w-6 hover:bg-muted"
                   >
-                    <Pencil className="h-4 w-4 text-black/90" />
+                    <Pencil className="h-4 w-4 text-black" />
                   </Button>
                 </>
               )}
@@ -145,17 +138,16 @@ export function BudgetProgress({ initialBudget, currentExpenses }) {
                   ? "bg-red-600"
                   : percentUsed >= 75
                   ? "bg-yellow-500"
-                  : "bg-green-300"
+                  : "bg-green-500"
               }`}
             />
-            <div className="flex justify-between items-center text-xs text-gray-800 mt-1">
-             <div className="flex items-center gap-1 bg-[#e9ffd2]/70 px-2 py-1 rounded-full text-xs text-black/90">
-              <TrendingDown className="h-3 w-3 text-muted-foreground" />
-              {percentUsed.toFixed(1)}% used
-            </div>
-              <span className="font-medium text-black">
-                Remaining: $
-                {(initialBudget.amount - currentExpenses).toFixed(2)}
+            <div className="flex justify-between items-center text-xs mt-1">
+              <div className="flex items-center gap-1 bg-[#8aeb30]/85 px-2 py-1 rounded-full text-sm text-black mt-3 font-semibold">
+                <TrendingDown className="h-5 w-5" />
+                {percentUsed.toFixed(1)}% used
+              </div>
+              <span className="font-semibold text-black text-sm">
+                Remaining: ${(initialBudget.amount - currentExpenses).toFixed(2)}
               </span>
             </div>
           </div>
