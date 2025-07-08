@@ -40,7 +40,7 @@ export default function FeaturesSection() {
             Why be Centsible?
           </h2>
           <p className="text-lg font-light mb-10 max-w-md">
-            We offer everything you need and nothing you don't. From our dashboard to widgets,
+            We offer everything you need and nothing you don&rsquo;t. From our dashboard to widgets,
             Centsible is designed for how you actually spend.
           </p>
         </div>
