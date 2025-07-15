@@ -59,10 +59,7 @@ export function AccountCard({ account }) {
     backdrop-blur-md 
     rounded-2xl 
     shadow-lg 
-    hover:shadow-xl 
     transition-shadow duration-300
-    hover:border-[#82f85b]
-    hover:shadow-[0_0_20px_#82f85b]
     text-[#ddffc9]
   "
 >

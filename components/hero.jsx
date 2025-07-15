@@ -28,8 +28,8 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight text-[#f1fde9] mb-8">
-              Finally, finance that makes{" "}
+            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight text-[#d5efc3] mb-8">
+              Money management <br/> that just makes perfect {" "}
               <span className="inline-block">
                 <AnimatePresence mode="wait">
                   <motion.span
@@ -38,7 +38,7 @@ const HeroSection = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="inline-block text-[#6ab326] ml-1"
+                    className="inline-block text-[#87e330] ml-1"
                   >
                     {word}
                   </motion.span>
@@ -46,8 +46,8 @@ const HeroSection = () => {
               </span>
             </h1>
 
-            <p className="text-xl sm:text-lg md:text-xl text-[#f1fde9] leading-relaxed font-light max-w-2xl">
-              Centsible is built with users in mind. Simplify budgeting, automate insights, and unlock financial freedom in one smart dashboard.
+            <p className="text-xl sm:text-lg md:text-2xl text-[#f1fde9] leading-relaxed font-normal max-w-2xl">
+              Centsible is built with users in mind. Simplify budgeting, automate insights, and unlock financial freedom all through one smart dashboard.
             </p>
           </motion.div>
         </div>

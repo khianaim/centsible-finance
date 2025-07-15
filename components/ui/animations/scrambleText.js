@@ -14,7 +14,7 @@ export default function ScrambleText({ text }) {
   return (
     <span
       ref={ref}
-      className="inline-block text-[#f1fde9] transition-all duration-500"
+      className="inline-block text-[#d5efc3] transition-all duration-500"
     />
   );
 }

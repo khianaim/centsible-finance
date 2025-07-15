@@ -42,7 +42,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-black/30 backdrop-blur-md">
-      <nav className="container mx-auto px-6 py-2 flex items-center justify-between">
+      <nav className="container mx-auto px-6 py-6 flex items-center justify-between">
         {/* LEFT: Logo + Centsible [Dynamic Word] */}
         <div className="flex items-center space-x-3">
           <Link href="/" passHref>
@@ -54,7 +54,7 @@ export default function Header() {
                 height={32}
                 className="object-contain"
               />
-               <span className="hidden sm:inline text-lg font-semibold text-[#f1fde9]">
+               <span className="hidden sm:inline text-xl font-semibold text-[#d5efc3]">
                 Centsible <ScrambleText text={sectionName} />
               </span>
             </div>
@@ -80,12 +80,12 @@ export default function Header() {
 
           <SignedOut>
             <SignInButton forceRedirectUrl="/dashboard">
-              <Button
-                variant="ghost"
-                className="bg-transparent text-base font-normal text-[#f1fde9] p-0 m-0 border-none shadow-none hover:bg-transparent hover:text-white focus:outline-none"
-              >
-                Login
-              </Button>
+             <Button
+              variant="ghost"
+              className="bg-[#87e330] rounded-full text-lg font-semibold text-black px-6 py-2 hover:bg-[#6db526] focus:outline-none transition"
+            >
+              Get Started
+            </Button>
             </SignInButton>
           </SignedOut>
 
