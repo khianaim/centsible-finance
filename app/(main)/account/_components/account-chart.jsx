@@ -87,7 +87,7 @@ export function AccountChart({ transactions }) {
     transition-shadow duration-300
     text-gray-900"
 >
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7 text-white">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7 text-black">
         <CardTitle className="text-lg font-normal text-black">
           Transaction Overview
         </CardTitle>
