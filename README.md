@@ -29,9 +29,9 @@ Secure Authentication: User login and sign-up via Clerk for secure authenticatio
 Responsive UI: Fully responsive design using Tailwind CSS.
 
 # Preview:
-<img width="956" alt="image" src="https://github.com/user-attachments/assets/4e29a971-566b-4682-8ad6-dec09796fea6" />
+<img width="1920" height="875" alt="cfhero" src="https://github.com/user-attachments/assets/eafb8bcf-4ccb-43fa-a110-cfc992b652ed" />
 
-<img width="945" alt="image" src="https://github.com/user-attachments/assets/6de875df-f387-4a50-9b10-b7b6eb5f7362" />
+<img width="1349" height="698" alt="cfdash" src="https://github.com/user-attachments/assets/f131f33c-4c56-4360-bf18-f76a14e75ec5" />
 
-<img width="920" alt="image" src="https://github.com/user-attachments/assets/87c247d5-a338-484d-a50b-02a93eb19295" />
+<img width="1191" height="698" alt="cftrans" src="https://github.com/user-attachments/assets/17489d79-7833-4dd4-87d8-95007a71e816" />
 
